@@ -1,37 +1,19 @@
 <template>
     <div class="home">
         <div class="products">
-            <div class="product">
+            <div
+                v-for="(product, index) in this.products"
+                class="product"
+                :key="index"
+            >
                 <div
                     class="product-image"
-                    style="
-                        background-image: url(&quot;https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg&quot;);
-                    "
+                    :style="{
+                        backgroundImage: 'url(' + product.image + ')',
+                    }"
                 ></div>
-                <h4>Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops</h4>
-                <p class="price">US$ 109.95</p>
-                <button>Add to bag</button>
-            </div>
-            <div class="product">
-                <div
-                    class="product-image"
-                    style="
-                        background-image: url(&quot;https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg&quot;);
-                    "
-                ></div>
-                <h4>Mens Casual Premium Slim Fit T-Shirts</h4>
-                <p class="price">US$ 22.30</p>
-                <button>Add to bag</button>
-            </div>
-            <div class="product">
-                <div
-                    class="product-image"
-                    style="
-                        background-image: url(&quot;https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg&quot;);
-                    "
-                ></div>
-                <h4>Mens Cotton Jacket</h4>
-                <p class="price">US$ 55.99</p>
+                <h4>{{ product.title }}</h4>
+                <p class="price">{{ product.price.toFixed(2) }}</p>
                 <button>Add to bag</button>
             </div>
         </div>
@@ -42,11 +24,11 @@
 export default {
     name: "HomePage",
     data() {
-        return;
+        return {};
     },
     computed: {
         products() {
-            return this.$store.products;
+            return this.$store.state.products;
         },
     },
     methods: {},
