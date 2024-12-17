@@ -50,8 +50,9 @@ export default {
         getTotal() {
             var total = 0;
             this.productsInBag.forEach((p) => {
-                total += p.price;
+                total += p.price * p.quantity;
             });
+            return total.toFixed(2);
         },
     },
     computed: mapState(["productsInBag"]),
