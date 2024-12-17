@@ -14,6 +14,7 @@ import axios from "axios";
 export default {
     created() {
         this.$store.dispatch("fetchProducts");
+        this.$store.dispatch("loadBag");
     },
     computed: mapState(["productsInBag"]),
 };
