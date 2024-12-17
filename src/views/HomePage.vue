@@ -14,10 +14,14 @@
                 ></div>
                 <h4>{{ product.title }}</h4>
                 <p class="price">{{ product.price.toFixed(2) }}</p>
-                <button>Add to bag</button>
+                <button v-if="!isInBag(product)" @click="addToBag(product)">
+                    Add to bag
+                </button>
             </div>
         </div>
     </div>
+
+    produtos no carrinho{{ productsInBag.length }}
 </template>
 
 <script>
@@ -30,8 +34,19 @@ export default {
         products() {
             return this.$store.state.products;
         },
+        productsInBag() {
+            return this.$store.state.productsInBag;
+        },
     },
-    methods: {},
+    methods: {
+        addToBag(product) {
+            product.quantity = 1;
+            this.$store.dispatch("addToBag", product);
+        },
+        isInBag(product) {
+            return this.productsInBag.find((p, index) => p.id === product.id);
+        },
+    },
 };
 </script>
 

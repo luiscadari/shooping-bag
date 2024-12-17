@@ -5,11 +5,15 @@ export default createStore({
   state: {
     //dados
     products: [],
+    productsInBag: [],
   },
   mutations: {
     fetchProducts(state, products) {
       console.log(products);
       state.products = products;
+    },
+    addToBag(state, product) {
+      state.productsInBag.push(product);
     },
   },
   actions: {
@@ -17,6 +21,9 @@ export default createStore({
       axios.get("https://fakestoreapi.com/products").then((response) => {
         commit("fetchProducts", response.data);
       });
+    },
+    addToBag({ commit }, product) {
+      commit("addToBag", product);
     },
   },
   modules: {},
