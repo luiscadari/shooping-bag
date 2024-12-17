@@ -1,17 +1,21 @@
 <template>
     <div id="nav">
         <router-link to="/">Home</router-link> -
-        <router-link to="/basket">Shopping Bag (0)</router-link>
+        <router-link to="/basket"
+            >Shopping Bag ({{ productsInBag.length }})</router-link
+        >
     </div>
     <router-view />
 </template>
 
 <script>
+import { mapState } from "vuex";
 import axios from "axios";
 export default {
     created() {
         this.$store.dispatch("fetchProducts");
     },
+    computed: mapState(["productsInBag"]),
 };
 </script>
 
