@@ -4,6 +4,7 @@
             <div
                 v-for="(product, index) in this.products"
                 class="product"
+                :class="{ inBag: isInBag(product) }"
                 :key="index"
             >
                 <div
@@ -16,6 +17,13 @@
                 <p class="price">{{ product.price.toFixed(2) }}</p>
                 <button v-if="!isInBag(product)" @click="addToBag(product)">
                     Add to bag
+                </button>
+                <button
+                    @click="this.$store.dispatch('removeFromBag', product.id)"
+                    v-else
+                    class="remove"
+                >
+                    Remove from Bag
                 </button>
             </div>
         </div>
